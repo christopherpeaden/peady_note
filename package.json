@@ -1,0 +1,25 @@
+{
+  "name": "peady-note",
+  "version": "1.0.0",
+  "description": "",
+  "main": "peady-note.js",
+  "dependencies": {
+    "pg": "^6.1.2"
+  },
+  "devDependencies": {
+    "jasmine": "^2.5.3"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/christopherpeaden/peady_note.git"
+  },
+  "author": "Christopher Peaden",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/christopherpeaden/peady_note/issues"
+  },
+  "homepage": "https://github.com/christopherpeaden/peady_note#readme"
+}

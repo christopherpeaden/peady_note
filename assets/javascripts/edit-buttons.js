@@ -1,4 +1,16 @@
+var obj = new XMLHttpRequest();
 var editButtons = document.getElementsByClassName("edit-button");
+
+obj.onreadystatechange = function() {//Call a function when the state changes.
+    if(obj.readyState == XMLHttpRequest.DONE && obj.status == 200) {
+        parser = new DOMParser();
+        var listDiv = document.getElementById('content');
+        var list = listDiv.firstChild;
+        doc = parser.parseFromString(obj.response, "text/html");
+        listDiv.replaceChild(doc.firstChild.children[1].firstChild, list);
+        addEventsToEditButtons();
+    }
+}
 
 function addEventsToEditButtons() {
     for (var x = 0; x < editButtons.length; x++) {
@@ -45,11 +57,9 @@ function addEventsToEditButtons() {
 }
 
 function sendSaveRequest(saveLink, input) {
-  var saveId = saveLink.getAttribute('data-id');
-  var title = input.value;
-  console.log(title);
-  obj.open("PUT", "http://localhost?id=" + saveId + "&title=" + title);
-  obj.send();
-  console.log("http://localhost?id=" + saveId + "&title=" + title);
+    var saveId = saveLink.getAttribute('data-id');
+    var title = input.value;
+    obj.open("PUT", "http://localhost?id=" + saveId + "&title=" + title);
+    obj.send();
 }
 addEventsToEditButtons();

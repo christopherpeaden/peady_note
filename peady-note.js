@@ -1,9 +1,10 @@
 var http = require('http');
 var Pool = require('pg').Pool;
 var pool = new Pool({database: 'peady_note'})
-var writePage = require('./responses/write-page.js');
 var optionsResponse = require('./responses/options-response.js');
+var writePage = require('./responses/write-page.js');
 var postResponse = require('./responses/post-response.js');
+var putResponse = require('./responses/put-response.js');
 var deleteResponse = require('./responses/delete-response.js');
 
 http.createServer(function (request, response) {
@@ -16,6 +17,9 @@ http.createServer(function (request, response) {
             break;
         case "POST": 
             postResponse(request, response);
+            break;
+        case "PUT": 
+            putResponse(request, response);
             break;
         case "DELETE": 
             deleteResponse(request, response);

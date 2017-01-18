@@ -1,5 +1,5 @@
-var Pool = require('pg').Pool;
 var qs = require('querystring');
+var Pool = require('pg').Pool;
 var pool = new Pool({database: 'peady_note'})
 
 module.exports = function writePage(response) {
@@ -13,11 +13,11 @@ module.exports = function writePage(response) {
             '\n<meta charset="utf-8">\n<title>Peady Note</title>\n' + 
             '<style type="text/css">* {font-family:arial, sans-serif;}</style>\n' + 
             '\n\n<h1>Peady Note</h1>\n' + 
-            '<div id="content"><ul>' +
+            '<div id="content"><ul id="content-list">' +
         '\n');
 
         for(var x = 0 ; x < data.rows.length; x++) {
-            response.write('<li>' + data.rows[x].title + 
+            response.write('<li id="list-item-' + data.rows[x].id + '">' + data.rows[x].title + 
                 ' <a href="#" data-id="' + 
                 data.rows[x].id +
                 '" class="edit-button">Edit</a> <a href="#" data-id="' +
@@ -28,6 +28,7 @@ module.exports = function writePage(response) {
         response.write('</ul></div>');
         response.write('<form method="POST"><label>New item: </label><input name="title"></input><input type="submit" value="Submit"></input></form>\n');
         response.write("<script src='assets/javascripts/xml-http-requests.js'></script>");
+        response.write("<script src='assets/javascripts/edit-buttons.js'></script>");
         response.end();
     })
 }

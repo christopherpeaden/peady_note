@@ -2,6 +2,12 @@ var Pool = require('pg').Pool;
 var pool = new Pool({database: 'peady_note'})
 var url  = require('url');
 
+if (process.env.NODE_ENV === "development") {
+    var pool = new Pool({database: 'peady_note'})
+} else {
+    var pool = new Pool({database: 'peady_note_test'});
+}
+
 module.exports = function putResponse(request, response) { 
     var queryData = url.parse(request.url, true).query;
 

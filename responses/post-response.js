@@ -3,6 +3,12 @@ var pool = new Pool({database: 'peady_note'})
 var qs = require('querystring');
 var writePage = require('./write-page.js');
 
+if (process.env.NODE_ENV === "development") {
+    var pool = new Pool({database: 'peady_note'})
+} else {
+    var pool = new Pool({database: 'peady_note_test'});
+}
+
 module.exports = function postResponse(request, response) {
     var body = '';
 

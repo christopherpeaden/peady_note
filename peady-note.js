@@ -1,6 +1,6 @@
+process.env.NODE_ENV = process.env.NODE_ENV || 'development';
+
 var http = require('http');
-var Pool = require('pg').Pool;
-var pool = new Pool({database: 'peady_note'})
 var optionsResponse = require('./responses/options-response.js');
 var writePage = require('./responses/write-page.js');
 var postResponse = require('./responses/post-response.js');

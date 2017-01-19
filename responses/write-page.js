@@ -1,6 +1,11 @@
 var qs = require('querystring');
 var Pool = require('pg').Pool;
-var pool = new Pool({database: 'peady_note'})
+
+if (process.env.NODE_ENV === "development") {
+    var pool = new Pool({database: 'peady_note'})
+} else {
+    var pool = new Pool({database: 'peady_note_test'})
+}
 
 module.exports = function writePage(response) {
     pool.query('SELECT * FROM items WHERE list_id = 1', function(err, data) {
@@ -27,8 +32,8 @@ module.exports = function writePage(response) {
 
         response.write('</ul></div>');
         response.write('<form method="POST"><label>New item: </label><input name="title"></input><input type="submit" value="Submit"></input></form>\n');
-        response.write("<script src='assets/javascripts/xml-http-requests.js'></script>");
-        response.write("<script src='assets/javascripts/edit-buttons.js'></script>");
+        response.write("<script type='text/javascript' src='assets/javascripts/xml-http-requests.js'></script>");
+        response.write("<script type='text/javascript' src='assets/javascripts/edit-buttons.js'></script>");
         response.end();
     })
 }

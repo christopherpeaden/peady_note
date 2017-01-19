@@ -7,7 +7,8 @@
     "pg": "^6.1.2"
   },
   "devDependencies": {
-    "jasmine": "^2.5.3"
+    "jasmine": "^2.5.3",
+    "request": "^2.79.0"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

@@ -15,25 +15,22 @@ module.exports = function putResponse(request, response) {
         if (err) {
             return console.error('error happened during query', err)
         }
-        pool.query('SELECT * FROM items WHERE list_id = 1', function(err, data) {
+        pool.query("SELECT * FROM items WHERE id = '" + queryData['id'] + "'", function(err, data) {
             if (err) {
                 return console.error('error happened during query', err)
             }
 
             response.writeHead(200, {'Content-Type': 'text/html', 'Access-Control-Allow-Origin': '*'});
-            response.write('<ul>\n');
 
-            for(var x = 0 ; x < data.rows.length; x++) {
-                response.write('<li>' +
-                    data.rows[x].title +
+                response.write(
+                    '<li id="list-item-' + queryData['id'] + '">' +
+                    queryData['title'] +
                     ' <a href="#" data-id="' +
-                    data.rows[x].id +
+                    queryData['id'] +
                     '" class="edit-button">Edit</a> <a href="#" data-id="' +
-                    data.rows[x].id + '" class="delete-button">Delete</a></li>'
+                    queryData['id'] + '" class="delete-button">Delete</a></li>'
                 );
-            }
-            response.write('</ul>');
-            response.end();
+                response.end();
+            })
         });
-    });
-};
+    };

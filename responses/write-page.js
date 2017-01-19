@@ -32,7 +32,7 @@ module.exports = function writePage(response) {
 
         response.write('</ul></div>');
         response.write('<form method="POST"><label>New item: </label><input name="title"></input><input type="submit" value="Submit"></input></form>\n');
-        response.write("<script type='text/javascript' src='assets/javascripts/xml-http-requests.js'></script>");
+        response.write("<script type='text/javascript' src='assets/javascripts/delete-buttons.js'></script>");
         response.write("<script type='text/javascript' src='assets/javascripts/edit-buttons.js'></script>");
         response.end();
     })

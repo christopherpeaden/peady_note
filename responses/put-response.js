@@ -31,6 +31,6 @@ module.exports = function putResponse(request, response) {
                     queryData['id'] + '" class="delete-button">Delete</a></li>'
                 );
                 response.end();
-            })
-        });
-    };
+        })
+    });
+};

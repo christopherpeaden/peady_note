@@ -25,7 +25,23 @@ module.exports = function postResponse(request, response) {
             if (err) {
                 return console.error('error happened during query', err)
             }
-            writePage(response);
-        })
-    });
-}
+            pool.query("SELECT * FROM items ORDER BY id DESC LIMIT 1", function(err, data) {
+                if (err) {
+                    return console.error('error happened during query', err)
+                }
+                var item = data.rows[0];
+
+                response.writeHead(200, {'Content-Type': 'text/html', 'Access-Control-Allow-Origin': '*'});
+                response.write(
+                    '<li id="list-item-' + item.id + '">' +
+                    item.title +
+                    ' <a href="#" data-id="' +
+                    item.id +
+                    '" class="edit-button">Edit</a> <a href="#" data-id="' +
+                    item.id + '" class="delete-button">Delete</a></li>'
+                );
+                response.end();
+	    })
+	});
+    })
+};

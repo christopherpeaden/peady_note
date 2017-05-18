@@ -31,11 +31,10 @@ module.exports = function writePage(response) {
         }
 
         response.write('</ul></div>');
-        response.write('<form id="submit-form"><label>New item: </label><input name="title" id="submit-input"></input><input type="submit" value="Submit"></input></form>\n');
+        response.write('<form id="submit-form"><label>New item: </label><input name="title" id="submit-input"></input><input name="submit" type="submit" value="Submit"></input></form>\n');
         response.write("<script type='text/javascript' src='assets/javascripts/delete-buttons.js'></script>");
         response.write("<script type='text/javascript' src='assets/javascripts/edit-buttons.js'></script>");
         response.write("<script type='text/javascript' src='assets/javascripts/new-item-submit.js'></script>");
         response.end();
     })
 }
-

@@ -1,18 +1,5 @@
-var obj = new XMLHttpRequest();
-var editButtons = document.getElementsByClassName("edit-button");
-
-obj.onreadystatechange = function() {//Call a function when the state changes.
-    if(obj.readyState == XMLHttpRequest.DONE && obj.status == 200) {
-        parser = new DOMParser();
-        var listDiv = document.getElementById('content');
-        var list = listDiv.firstChild;
-        doc = parser.parseFromString(obj.response, "text/html");
-        listDiv.replaceChild(doc.firstChild.children[1].firstChild, list);
-        addEventsToEditButtons();
-    }
-}
-
 function addEventsToEditButtons() {
+    var editButtons = document.getElementsByClassName("edit-button");
     for (var x = 0; x < editButtons.length; x++) {
         var editButton = editButtons[x];
 
@@ -30,7 +17,6 @@ function addEventsToEditButtons() {
             form.appendChild(input);
             var listEditButton = document.getElementById('list-item-' + id).children[0];
             var listDeleteButton = document.getElementById('list-item-' + id).children[1];
-
 
             listItem.replaceChild(form, listItemText);
             listItem.removeChild(listEditButton);
@@ -50,13 +36,22 @@ function addEventsToEditButtons() {
             listItem.appendChild(cancelLink);
 
             saveLink.addEventListener("click", function() {
-                sendSaveRequest(saveLink, input);
+                var obj = new XMLHttpRequest();
+                sendSaveRequest(obj, saveLink, input);
+                obj.onreadystatechange = function() {
+                    if(obj.readyState == XMLHttpRequest.DONE && obj.status == 200) {
+                        parser = new DOMParser();
+                        doc = parser.parseFromString(obj.response, "text/html");
+                        var list = document.getElementsByTagName('ul')[0]; 
+                        list.replaceChild(doc.firstChild.children[1].firstChild, listItem);
+                    }
+                }
             });
         })
     }
 }
 
-function sendSaveRequest(saveLink, input) {
+function sendSaveRequest(obj, saveLink, input) {
     var saveId = saveLink.getAttribute('data-id');
     var title = input.value;
     obj.open("PUT", "http://localhost?id=" + saveId + "&title=" + title);

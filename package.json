@@ -7,8 +7,10 @@
     "pg": "^6.1.2"
   },
   "devDependencies": {
+    "chromedriver": "^2.27.2",
     "jasmine": "^2.5.3",
-    "request": "^2.79.0"
+    "request": "^2.79.0",
+    "selenium-webdriver": "^3.0.1"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

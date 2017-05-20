@@ -15,7 +15,9 @@ submitForm.addEventListener('submit', function(e) {
             var newListItem = doc.firstChild.children[1].firstChild;
             var list = document.getElementsByTagName('ul')[0]; 
             list.appendChild(newListItem);
-            //addEventsToEditButton(newListItem.children[0].dataset.id);
+            newListItem.children[0].addEventListener("click", function() {
+                setupInputForm(this.dataset.id);
+            });
             addEventsToDeleteButton(newListItem.children[1].dataset.id);
         }
     }

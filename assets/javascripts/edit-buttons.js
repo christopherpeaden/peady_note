@@ -35,6 +35,8 @@ function setupInputForm(id) {
     cancelButton.appendChild(cancelText);
 
     listItem.appendChild(saveButton);
+    var spacer = document.createTextNode(" ");
+    listItem.appendChild(spacer);
     listItem.appendChild(cancelButton);
 
     saveButton.addEventListener("click", function() {
@@ -53,6 +55,15 @@ function setupInputForm(id) {
                 addEventsToDeleteButton(newListItem.children[1].dataset.id);
             }
         }
+    });
+
+    cancelButton.addEventListener("click", function() {
+        listItem.replaceChild(listItemText, form);
+        listItem.appendChild(listEditButton);
+        listItem.appendChild(spacer);
+        listItem.appendChild(listDeleteButton);
+        listItem.removeChild(saveButton);
+        listItem.removeChild(cancelButton);
     });
 }
 
